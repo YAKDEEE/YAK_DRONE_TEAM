@@ -1,6 +1,8 @@
-function [] = to_bills(curreny)
+function [C] = to_bills(curreny)
 %to_bills 이 함수의 요약 설명 위치
 %달러, 유로, 엔, 위안을 받아서 화폐를 최소로 만들기
+
+
 
 dollar_bills=[100 50 20 10 5 2 1 0 0 0];
 euro_bills = [500 200 100 50 20 10 5 2 1 0];
