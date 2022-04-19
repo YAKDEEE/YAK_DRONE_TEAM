@@ -1,4 +1,3 @@
-hi
 # YAK_DRONE_TEAM
 ## to_bills 함수 설명
 ### 화폐 종류
