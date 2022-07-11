@@ -63,11 +63,11 @@ MATLAB Support Package for Ryze Tello Drones
 # Ⅳ. Architecture 및 알고리즘 흐름도
 
 ### ①Architecture
-<img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/architecture.png" width="3000px" height="800px" alt="Step3"></img><br/>
+<img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/architecture.png" width="3000px" height="800px" alt="Arch"></img><br/>
 <br/><br/>
 
 ### ②Flow Chart
-<img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/flowchart.png" width="3100px" height="800px" alt="Step3"></img><br/>
+<img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/flowchart.png" width="3100px" height="800px" alt="Flow"></img><br/>
 <br/><br/>
 
 # Ⅴ. 핵심 알고리즘 및 일부 소스코드 설명
@@ -78,7 +78,7 @@ MATLAB Support Package for Ryze Tello Drones
 
 ## Exception. 원이 검출 되지 않았을 경우
 ### (1번의 멤버함수에서 false 값이 5번 이상 나타난 경우)
-
+<img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/findingcircle.png" width="3100px" height="800px" alt="Nocircle"></img><br/>
 
 
 
