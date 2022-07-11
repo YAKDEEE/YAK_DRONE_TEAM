@@ -7,7 +7,7 @@
 # Requirements
  ### Image Processing Toolbox, MATLAB Support Package for Ryze Tello Drones
 
-지향점 및 방법론
+# 지향점 및 방법론
 
 코드 유지와 보수, 디버그 및 효율적인 작동을 위하여 아래와 같은 지향점을 두었음.
 
