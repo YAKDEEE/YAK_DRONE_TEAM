@@ -13,12 +13,10 @@ MATLAB Support Package for Ryze Tello Drones
 2. 변수 정의와 주요 Threshold 값 제시
 3. 기능 흐름도 제시
 4. Architecture 및 알고리즘 흐름도 제시
-5. 핵심 알고리즘 제시 및 일부 코드 설명
+5. 핵심 알고리즘 제시 및 전략 세부 설명
 6. 설계시 마주한 문제점 및 해결방법
-7. 개선 사항
+7. 개선 가능 사항
 8. Reference
-
- 
 
 # Ⅰ. 설계 지향점과 방법론 
 ### 코드 유지와 보수, 디버그 및 효율적인 작동을 위하여 아래와 같은 지향점을 두었습니다.
@@ -70,17 +68,32 @@ MATLAB Support Package for Ryze Tello Drones
 <img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/flowchart.png" width="3100px" height="800px" alt="Flow"></img><br/>
 <br/><br/>
 
-# Ⅴ. 핵심 알고리즘 및 일부 소스코드 설명
+# Ⅴ. 핵심 알고리즘 및 전략 설명.
 
-## 1. 원 찾기 알고리즘
+## 1. 원 찾기 전략.
 ### (원을 찾는 알고리즘은 OnlyDetectCircle 멤버함수에 있습니다.)
-
 
 ## Exception. 원이 검출 되지 않았을 경우
 ### (1번의 멤버함수에서 false 값이 5번 이상 나타난 경우)
 <img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/findingcircle.png" width="3100px" height="800px" alt="Nocircle"></img><br/>
 
+## 2. 이미지 처리 방법
+### (이미지 처리 알고리즘은 ImageProcessing 멤버함수와 OnlyDetectCircle 멤버함수 일부에 있습니다.)
 
+## 3. 중심 맞추기 알고리즘 및 원 통과 전략
+### (해당 알고리즘은 CenterFinder 멤버함수에 있습니다.)
 
+## ADD. 드론의 카메라 위치에 따른 원 중심 Y값 Weights
 
+## 4. 이심률에 따른 각도 계산 전략
+### (해당 알고리즘은 ~~~)
+
+# Ⅵ. 설계시 마주한 문제점.
+## 1. 최소 이동 거리 문제.
+## 2. snapshot 오류
+## 3. 멤버변수 오류
+
+# Ⅶ. 개선 가능 사항
+
+# Ⅷ. Reference
 
