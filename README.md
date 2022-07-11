@@ -44,11 +44,10 @@ nCount → 몇번째 원을 통과 해야하는지를 나타내는  변수
 nStep -> 몇번째 단계인지를 나타내는 변수
 
 3. Flow Diagram (원 하나를 통과할때)   
-![Alt text](images\circlefind.png)   
-![Alt text](images\center.png)     
-![Alt text](images\centerfinder.png)   
-![Alt text](images\circlefind.png)   
-![Alt text](images\turn.png)   
+![Alt text](https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/circlefind.png)   
+![Alt text](https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/center.png)     
+![Alt text](https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/centerfinder.png)   
+![Alt text](https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/turn.png)   
 
 
 
