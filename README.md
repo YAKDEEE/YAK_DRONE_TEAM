@@ -63,11 +63,11 @@ MATLAB Support Package for Ryze Tello Drones
 # Ⅳ. Architecture 및 알고리즘 흐름도
 
 ### ①Architecture
-<img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/architecture.png" width="3000px" height="1000px" alt="Step3"></img><br/>
+<img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/architecture.png" width="3000px" height="800px" alt="Step3"></img><br/>
 <br/><br/>
 
 ### ②Flow Chart
-<img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/flowchart.png" width="3100px" height="1000px" alt="Step3"></img><br/>
+<img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/flowchart.png" width="3100px" height="800px" alt="Step3"></img><br/>
 <br/><br/>
 
 # Ⅴ. 핵심 알고리즘 및 일부 소스코드 설명
