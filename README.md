@@ -122,29 +122,71 @@ MATLAB Support Package for Ryze Tello Drones
  </pre>
  
  
-### 모폴로지(Mopolgy) 연산이란?
+#### 모폴로지(Mopolgy) 연산이란?
 모폴로지는  영상에서 객체의 형태 및 구조에 대해 분석하고 처리하는 기법을 의미합니다.       
      
 모폴로지 팽창은 객체의 외곽을 확장시키는 연산입니다.     
 <img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/dilation.png" width="450px" height="300px" alt="Nocircle"></img><br/>     
 모폴로지 침식은 객체의 외곽을 깍아내는 연산입니다.     
 <img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/erosion.png" width="450px" height="300px" alt="Nocircle"></img><br/>   
-    
-### 아래는 실제 드론 영상에서 모폴로지 적용 전 후를 비교한 이미지 입니다.     
-
-<img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/erosion.png" width="450px" height="300px" alt="Nocircle"></img><br/>   
+     
+#### 아래는 실제 드론 영상에서 모폴로지 적용 전 후를 비교한 이미지 입니다.     
+<img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/difference.png" width="450px" height="300px" alt="Nocircle"></img><br/>   
 
 ## 2. 원 찾기 전략.
 ### (원을 찾는 알고리즘은 OnlyDetectCircle 멤버함수에 있습니다.)
-① 이진화된 
-② 
-
+① 보수화된 파란색 이진화된 영상에 대하여 영역 경계선을 추적합니다.
+<pre>
+<code>
+ [B,L] = bwboundaries(aBw,'noholes');
+ </code>
+ </pre>
+② 닫힌 영역에 대하여 면적, 중심, 장축의 길이, 단축의 길이 를 찾아낸 후, Metric과 실제 영역을 비교하여 원과의 유사도를 찾습니다.    
+그중에서 가장 크고 원과 가까운 영역의 중심, 장/단축의 길이를 멤버변수에 저장합니다.   
 
 <img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/metric.png" width="200px" height="100px" alt="Nocircle"></img><br/>
+<pre>
+<code>
+sStats = regionprops(L,'Area','Centroid','MajorAxisLength','MinorAxisLength');
+        
+     
+ nMax_sizeB = 0;
 
-## Exception. 원이 검출 되지 않았을 경우
-### (1번의 멤버함수에서 false 값이 5번 이상 나타난 경우)
+ for k = 1:length(B)
+     aBoundary = B{k};
+     [nSizeB,void] = size(aBoundary);
+
+     nDelta_sq = diff(aBoundary).^2;    
+     nPerimeter = sum(sqrt(sum(nDelta_sq,2)));
+
+     nArea = sStats(k).Area;
+     nMetric = 4*pi*nArea/nPerimeter^2;
+
+     if nMetric > obj.cCircle_th
+         if(nSizeB>10)
+             if(nSizeB<3000 && nSizeB>nMax_sizeB)
+                 obj.aCentroid = sStats(k).Centroid;
+
+                 obj.nCircle_r = mean([sStats(k).MajorAxisLength sStats(k).MinorAxisLength],2);
+
+                 obj.nRatio = sStats(k).MinorAxisLength / sStats(k).MajorAxisLength;
+                 obj.aBestCircle = aBoundary;
+                 is_Circle = 1;
+
+                 nMax_sizeB = nSizeB;
+             end
+         end
+     end
+ end
+ </code>
+ </pre>
+## Exception. 원이 검출 되지 않았을 경우    
+### 경우1. 파란색조차 검출되지 않은 경우.
 <img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/findingcircle.png" width="3100px" height="800px" alt="Nocircle"></img><br/>
+    
+### 경우2. 파란색이 일부 검출된 경우.    
+
+
 ## 파랑색이 검출되었을 경우 
 ### 화면에 잡히는 파란색 픽셀 x, y값의 중심위치를 계산하여 y값의 중심위치가 비교 값보다 아래쪽에 위치하였을 때 드론이 아래로 35cm 내려가게 하였고 반대의 경우에는 올라가게 설정함. x값의 중심위치가 오른쪽에 있을 때는 드론이 왼쪽으로 80cm이동하게 하였고 반대의 경우에는 오른쪽으로 이동하게 설정하여 원을 찾게 설정하였음.
 
@@ -159,9 +201,6 @@ MATLAB Support Package for Ryze Tello Drones
 #### 원 통과 전략
 ##### 원의 중심으로 이동을 하고나서 원과의 거리가 너무 가까워서 원이 탐지가 안되면 적당히 직진을 한다. (//대충 드론과 원과의 거리가 가까운 짤)// 
 ##### 원의 중심으로 이동하고 나서 원이 탐지가 되는 경우 화면에서 보이는 원의 반지름을 계산하여 원과 드론 사이의 간격을 계산할 수 있는 식을 만들어 사용하였음.
-
-## ADD. 드론의 카메라 위치에 따른 원 중심 Y값 Weights
-### 드론의 카메라가 기체의 아래쪽에 위치하므로 드론이 원의 중심을 찾아 이동하여도 드론이 위로 치우치는 경향이 있어 Y값에 Weight를 설정하였음.
 
 ## 4. 이심률에 따른 각도 계산 전략
 ### (해당 알고리즘은 ~~~)
@@ -183,6 +222,10 @@ MATLAB Support Package for Ryze Tello Drones
 
 ## 3. 멤버변수 오류
 ### YakDrone을 값 클래스로 사용하면 할당되는 변수를 원래 객체에 대한 독립적인 복사본을 생성하고, 이 변수를 수정하는 경우 수정된 객체를 출력인수로 반환할때 오류가 발생하여 핸틀 클래스를 사용하였음. 핸들 클래스는 핸들 객체를 여러 변수에 할당하거나 함수에 전달할 수 있으므로 원래 객체의 복사본을 생성하지 않아 핸들 객체를 수정하는 함수는 객체를 변환할 필요가 없어 오류가 발생하지 않음.
+
+
+## 4. 드론의 카메라 위치에 따른 원 중심 Y값 Weights
+### 드론의 카메라가 기체의 아래쪽에 위치하므로 드론이 원의 중심을 찾아 이동하여도 드론이 위로 치우치는 경향이 있어 Y값에 Weight를 설정하였음.
 
 # Ⅶ. 개선 가능 사항
 ## 텔로 드론의 최소이동거리가 20cm로 주어진 원 크기에 비해 큰 경향이 있음. 따라서 원의 중심을 찾고 중심으로 이동하는 과정에서 정밀한 조정이 어려웠음.

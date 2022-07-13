@@ -18,7 +18,7 @@ classdef YakDrone < handle
         cTotal_Circle = 3;
         cCircle_size = [0.39,0.28,0.25];
         cRange_th = 50; 
-        cTargetY_weight=150;
+        cTargetY_weight=155;
 
         %assosiated move and distance
         

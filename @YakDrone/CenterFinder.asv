@@ -88,9 +88,10 @@ function is_Center = CenterFinder(obj)
                         dist = round(nDistance,2)+0.3;
                         
                         try 
-       
-                              moveforward(obj.mDrone,"Distance",dist,"Speed",obj.cSpeed_set);
-                         
+                            if nDistance>2.8 
+                                move(onj.)
+                            else
+                                moveforward(obj.mDrone,"Distance",dist,"Speed",obj.cSpeed_set);
 
                         catch e
                             disp(e);
