@@ -1,10 +1,10 @@
 # YakDrone
- ### 대한전기학회, Mathworks Korea, 광운대학교 공동 주최 2022 미니드론 대회 본선 진출 팀 “약둘기”의 드론 제어 클래스입니다.
+ ### 대한전기학회 공동 주최 2022 미니드론 대회 본선 진출 팀 “약둘기”의 드론 제어 클래스입니다.
  <img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/NormalYAK.png" width="698px" height="601px" alt="NormalYAK"></img>
 
 # 주의점!!
 ### matlab 현재 폴더가 clone한 폴더인지 확인하세요! main.m을 스크립트를 실행하면 해당 프로젝트 코드가 실행됩니다!    
-### 모든 멤버함수에는 try catch문이 적용되어 있습니다. 만약 드론이 비상착륙 했다면 에러 내용을 확인하세요!(07.13 일자로 모든 try catch문이 삭제되었습니다. 대회 당일 문제가 발생했을시 확인이 어려울 수 있기 때문입니다. 
+### 모든 멤버함수에는 try catch문이 적용되어 있습니다. 만약 드론이 비상착륙 했다면 에러 내용을 확인하세요!(07.13 일자로 모든 try catch문이 삭제되었습니다. 대회 당일 문제가 발생했을시 확인이 어려울 수 있기 때문입니다.)
 
 # Requirements
 Image Processing Toolbox     
