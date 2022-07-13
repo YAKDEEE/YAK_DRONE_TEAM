@@ -9,3 +9,5 @@ if ~err_code
 else
     disp("Exit with Error: ",err_code);
 end
+%%
+clear myDrone;
