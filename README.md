@@ -195,12 +195,60 @@ sStats = regionprops(L,'Area','Centroid','MajorAxisLength','MinorAxisLength');
 ## 3. 중심 맞추기 알고리즘 및 원 통과 전략
 ### (해당 알고리즘은 CenterFinder 멤버함수에 있습니다.)
 #### 중심 맞추기
-##### 원의 중심의 좌표와 이미지 중앙의 좌표값의 차이만큼 드론을 원의 중심으로 최대한 이동시킴. 
-드론이 이미지의 중앙 좌표값이 원의 중심좌표와 비슷하면 드론이 직진했을 때 원내부로 통과할 수 있다고 판단하여 드론에 직진 명령을 주어 원을 통과한다. 
+##### ① 원의 중심의 좌표와 이미지 중앙의 좌표값의 차이만큼 드론을 원의 중심으로 최대한 이동시킵니다.
+<pre>
+<code>
+
+</code>
+</pre>
+
+##### ② 드론이 이미지의 중앙 좌표값이 원의 중심좌표와 비슷하면 드론이 직진했을 때 원내부로 통과할 수 있다고 판단하여 드론에 직진 명령을 주어 원을 통과합니다.
+<pre>
+<code>
+if((nTarget_X ~= 0) || (nTarget_Y ~= 0))
+                            obj.MovetoLocation(nTarget_X,nTarget_Y);
+                            obj.is_last_we_had_positioned=1;
+                        else
+                            is_Center = 1;
+                        end
+</code>
+</pre>
 
 #### 원 통과 전략
 ##### 원의 중심으로 이동을 하고나서 원과의 거리가 너무 가까워서 원이 탐지가 안되면 적당히 직진을 한다. (//대충 드론과 원과의 거리가 가까운 짤)// 
-##### 원의 중심으로 이동하고 나서 원이 탐지가 되는 경우 화면에서 보이는 원의 반지름을 계산하여 원과 드론 사이의 간격을 계산할 수 있는 식을 만들어 사용하였음.
+##### ① 원의 중심으로 이동을 하고나서 원과의 거리가 너무 가까워서 원이 탐지가 안되면 적당히 직진을 합니다.
+
+<pre>
+<code>
+if((nTarget_X ~= 0) || (nTarget_Y ~= 0))
+                            obj.MovetoLocation(nTarget_X,nTarget_Y);
+                            obj.is_last_we_had_positioned=1;
+                        else
+                            %We dont have to move == we are in center.
+                            is_Center = 1;
+                        end
+</code>
+</pre>
+
+##### ② 원의 중심으로 이동하고 나서 원이 탐지가 되는 경우 화면에서 보이는 원의 반지름을 계산하여 원과 드론 사이의 간격을 계산할 수 있는 식을 만들어 사용하였습니다. 이 수식의 경우 직접 드론을 원에서 1m거리에서 부터 0.5m씩 뒤로 이동하면서 3.5m까지 위치 시켰을때 드론 화면상에서 보이는 반지름 길이를 여러번 측정하여 그 길이의 평균값을 구하여 추세선 수식을 구하였습니다.
+
+<pre>
+<code>
+if is_Center 
+                        Circle_r = obj.nCircle_r*(0.39/obj.cCircle_size(1,obj.nCount));
+                    
+                        nDistance = (515)*(Circle_r^(-0.954));
+                        dist = round(nDistance,2)+0.3;
+                        
+                        try 
+                            moveforward(obj.mDrone,"Distance",dist,"Speed",obj.cSpeed_set);
+                        catch e
+                            disp(e);
+                            disp("Error!");
+                        end
+                    end
+</code>
+</pre>
 
 ## 4. 이심률에 따른 각도 계산 전략
 ### (해당 알고리즘은 ~~~)
