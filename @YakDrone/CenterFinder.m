@@ -19,7 +19,7 @@ function is_Center = CenterFinder(obj)
                     nTarget_Y = -nBestCenter_Y + (obj.nSize_y/2);
                     %fprintf("%f 이심률\n",obj.nEccentricity);
 
-                   
+                    
                    fprintf("%f 단축/장축\n",obj.nRatio);
     
                     if obj.nRatio > obj.cOptimized_ratio_th
@@ -38,7 +38,7 @@ function is_Center = CenterFinder(obj)
                         
                         %handle move distance / upto 20cm
                         if((abs(nTarget_X) <= 0.20))
-                            if(abs(nTarget_X)>=0.18)
+                            if(abs(nTarget_X)>=0.16)
                                 nTarget_X = ((nTarget_X)/abs(nTarget_X)) * 0.2;
                             else
                                 nTarget_X=0;
@@ -46,7 +46,7 @@ function is_Center = CenterFinder(obj)
                             end
                         end
                         if((abs(nTarget_Y) <= 0.20))
-                            if(abs(nTarget_Y)>=0.18)
+                            if(abs(nTarget_Y)>=0.16)
                                 nTarget_Y = ((nTarget_Y)/abs(nTarget_Y)) * 0.2;
                             else
                                 nTarget_Y=0;

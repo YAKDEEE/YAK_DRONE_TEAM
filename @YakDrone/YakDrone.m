@@ -17,8 +17,8 @@ classdef YakDrone < handle
         cOptimized_ratio_th = 0.7; % 단축/장축 비율th 
         cTotal_Circle = 3;
         cCircle_size = [0.39,0.28,0.25];
-        cRange_th = 60; 
-        cTargetY_weight=140;
+        cRange_th = 50; 
+        cTargetY_weight=150;
 
         %assosiated move and distance
         

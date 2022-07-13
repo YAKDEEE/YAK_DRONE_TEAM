@@ -3,7 +3,7 @@ function is_Complete= TurnAngle(obj)
          if obj.nCount==3 
             turn(obj.mDrone,deg2rad(135));
             obj.MovetoLocation(-0.6,0);
-            moveforward(obj.mDrone,"Distance",1.0,"Speed",obj.cSpeed_set);
+            moveforward(obj.mDrone,"Distance",0.8,"Speed",obj.cSpeed_set);
          else
          
             turn(obj.mDrone,deg2rad(90));

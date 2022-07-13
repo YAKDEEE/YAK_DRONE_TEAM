@@ -51,14 +51,32 @@ function is_Complete = NewFindingCircle(obj)
             obj.MovetoLocation(nTarget_X,nTarget_Y);
             obj.nFinder = obj.nFinder+1;
         else
-            if nSum_of_blue_y <= -100 
-                obj.MovetoLocation(0,-obj.cFinder_Y_distance);
-            elseif nSum_of_blue_x>=70 && nSum_of_blue_x<=480
-                obj.MovetoLocation(obj.cFinder_X_distance,0);
+           
+            if nSum_of_blue_x>=70 && nSum_of_blue_x<=480
+                if nSum_of_blue_y >=50 
+                    obj.MovetoLocation(obj.cFinder_X_distance,obj.cFinder_Y_distance);
+                elseif nSum_of_blue_y <= -50
+                    obj.MovetoLocation(obj.cFinder_X_distance,-cFinder_Y_distance);
+                else 
+                    obj.MovetoLocation(obj.cFinder_X_distance,0);
+                end
             elseif nSum_of_blue_x>=-480 && nSum_of_blue_x<=-70
-                obj.MovetoLocation(-obj.cFinder_X_distance,0);
+                if nSum_of_blue_y >=50 
+                    obj.MovetoLocation(-obj.cFinder_X_distance,obj.cFinder_Y_distance);
+                elseif nSum_of_blue_y <= -50
+                    obj.MovetoLocation(-obj.cFinder_X_distance,-cFinder_Y_distance);
+                else 
+                    obj.MovetoLocation(-obj.cFinder_X_distance,0);
+                end
             else
-                obj.MovetoLocation(0,obj.cFinder_Y_distance)
+                if nSum_of_blue_y >=50 
+                    obj.MovetoLocation(0,obj.cFinder_Y_distance);
+                elseif nSum_of_blue_y <= -50
+                    obj.MovetoLocation(0,-cFinder_Y_distance);
+                else 
+                    is_Complete = 0;
+                    return;
+                end
             end
         end
         is_Complete = 1;
