@@ -287,7 +287,7 @@ if((abs(nTarget_X) <= 0.20))
 #### [해결방법]     
 드론의 카메라위치를 고려하여 목표 이동 Y 값에 weights를 주어 원드론이 찾은 원의 중심보다 더 아래로 움직이게 하도록합니다.     
 
-![image](https://user-images.githubusercontent.com/51030319/178758394-373ad162-a72b-4a88-9737-ad96d1ab4b0e.png)
+![그룹 14](https://user-images.githubusercontent.com/51030319/178759357-3eef0cfa-7bc3-469e-a5e1-5ec822aa7e00.png)
 
 반원의 경우 실제원의 중심보다 드론이 찾은 원의 중심이 전자보다 더 위에 위치하기 때문에 Y값 weights 값을 더 적게 주었습니다.
 ![image](https://user-images.githubusercontent.com/51030319/178758420-08024cf4-b7fa-4d8c-a344-5be77f1b0dbe.png)
