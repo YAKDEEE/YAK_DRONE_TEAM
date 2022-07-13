@@ -2,13 +2,15 @@
  ### 대한전기학회, Mathworks Korea, 광운대학교 공동 주최 2022 미니드론 대회 본선 진출 팀 “약둘기”의 드론 제어 클래스입니다.
  <img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/NormalYAK.png" width="698px" height="601px" alt="NormalYAK"></img>
 
+
+
 # Requirements
 Image Processing Toolbox     
 MATLAB Support Package for Ryze Tello Drones       
  
 # Getting Started
 ### 아래 코드와 설명은 약둘기 팀이 어떤 알고리즘과 방법론을 적용했는지 이해하기 쉽도록 구성되었습니다.
-### 본 클래스는 Matlab 프로젝트로 작성되어 .prj 파일을 엶으로써 파일경로에 클래스 파일들을 추가할 수 있습니다.
+
 ①  설계 지향점과 방법론 제시     
 ②  변수 정의와 주요 Threshold 값 제시     
 ③  기능 흐름도 제시     
@@ -17,6 +19,9 @@ MATLAB Support Package for Ryze Tello Drones
 ⑥  설계시 마주한 문제점 및 해결방법     
 ⑦  개선 가능 사항     
 ⑧  Reference     
+
+# How to start?!
+### 본 클래스는 Matlab 프로젝트로 작성되어 .prj 파일을 열어 써 파일경로에 클래스 파일들을 추가할 수 있습니다!!!
 
 # Ⅰ. 설계 지향점과 방법론 
 ### 코드 유지와 보수, 디버그 및 효율적인 작동을 위하여 아래와 같은 지향점을 두었습니다.
