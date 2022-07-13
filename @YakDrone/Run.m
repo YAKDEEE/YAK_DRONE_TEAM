@@ -32,7 +32,7 @@ function nError_code = Run(obj)
             if code == 0 
                 %First level, Start with very close distance, just shoot.
                 if obj.nCount == 1 
-                    moveforward(obj.mDrone,"Distance",cShoot_distance,"Speed",obj.cSpeed_set);
+                    moveforward(obj.mDrone,"Distance",obj.cShoot_distance,"Speed",obj.cSpeed_set);
                     obj.nStep=2;
                 else
                     obj.nFailCount= obj.nFailCount+1;

@@ -8,15 +8,15 @@ function is_Complete = ImageProcessing(obj)
             return;
         end
         obj.aConverted_HSV = aHSV_frame(:,:,1);
-        sfilter = aHSV_frame(:,:,2) > cFitler_S_weight;
-        vfilter = aHSV_frame(:,:,3) > cFitler_V_weight;
+        sfilter = aHSV_frame(:,:,2) > obj.cFitler_S_weight;
+        vfilter = aHSV_frame(:,:,3) > obj.cFitler_V_weight;
         obj.aFiltered_blue = ( obj.aConverted_HSV > obj.cMin_blue_th) & ( obj.aConverted_HSV < obj.cMax_blue_th);
 
         obj.aFiltered_blue = obj.aFiltered_blue .* sfilter;
         obj.aFiltered_blue = obj.aFiltered_blue .* vfilter;
-
-        obj.aFiltered_blue = imgaussfilt(obj.aFiltered_blue,2);
         
+        obj.aFiltered_blue = imgaussfilt(obj.aFiltered_blue,2);
+        imshow(obj.aFiltered_blue);
         
         [obj.nSize_y, obj.nSize_x] = size(obj.aFiltered_blue);
         

@@ -10,7 +10,7 @@ function is_Center = CenterFinder(obj)
                 nBestCenter_X = obj.aCentroid(1);
                 nBestCenter_Y = obj.aCentroid(2);
 
-                if(obj.nCircle_r < obj.cCircle_rad_th || obj.nEccentricity > obj.cCircle_ecc_th)
+                if(obj.nCircle_r < obj.cCircle_rad_th)
                     obj.NewFindingCircle();
                 else
                     nTarget_X = nBestCenter_X - (obj.nSize_x/2);
@@ -18,7 +18,7 @@ function is_Center = CenterFinder(obj)
                 
                     nTarget_Y = -nBestCenter_Y + (obj.nSize_y/2);
                     if obj.nEccentricity < obj.cCircle_Min_ecc_th
-                        nTarget_Y = round(nTarget_Y,2)-obj.cY_weight;
+                        nTarget_Y = round(nTarget_Y,2)-obj.cTargetY_weight;
                     else
                         nTarget_Y = round(nTarget_Y,2);
                     end
@@ -33,7 +33,7 @@ function is_Center = CenterFinder(obj)
                         
                         %handle move distance / upto 20cm
                         if((abs(nTarget_X) <= 0.20))
-                            if(abs(nTarget_X)>=0.17)
+                            if(abs(nTarget_X)>=0.18)
                                 nTarget_X = ((nTarget_X)/abs(nTarget_X)) * 0.2;
                             else
                                 nTarget_X=0;
@@ -41,7 +41,7 @@ function is_Center = CenterFinder(obj)
                             end
                         end
                         if((abs(nTarget_Y) <= 0.20))
-                            if(abs(nTarget_Y)>=0.17)
+                            if(abs(nTarget_Y)>=0.18)
                                 nTarget_Y = ((nTarget_Y)/abs(nTarget_Y)) * 0.2;
                             else
                                 nTarget_Y=0;
