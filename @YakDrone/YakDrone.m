@@ -5,20 +5,17 @@ classdef YakDrone < handle
         cMax_blue_th=0.670;
         cMin_blue_number = 500;
         cFitler_S_weight=0.35;
-        cFitler_V_weight=0.15;
-%         cMin_red_th = 0.995;
-%         cMax_red_th = 0.027;
+        cFitler_V_weight=0.15;   
         
         %assosiated circle
         cCircle_th = 0.45;
         cCircle_rad_th = 50;
-        cCircle_Max_ecc_th = 0.85;
-       % cCircle_Min_ecc_th = 0.5;
-        cOptimized_ratio_th = 0.7; % 단축/장축 비율th 
+        cCircle_Min_ecc_th = 0.50; %ecc 지웟음 
+        cOptimized_ratio_th = 0.7; 
         cTotal_Circle = 3;
         cCircle_size = [0.39,0.28,0.25];
         cRange_th = 50; 
-        cTargetY_weight=155;
+        cTargetY_weight=165;
 
         %assosiated move and distance
         
