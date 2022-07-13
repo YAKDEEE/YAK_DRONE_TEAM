@@ -204,6 +204,9 @@ sStats = regionprops(L,'Area','Centroid','MajorAxisLength','MinorAxisLength');
      
 ### 거리 계산 및 원 통과 알고리즘
  ② 계산된 원의 반지름을 바탕으로 현재 원까지의 거리를 구합니다. 그 후 직진합니다.
+ 
+ ![이미지 1](https://user-images.githubusercontent.com/51030319/178756271-7feca1ed-5a44-4e08-a3a4-65ef4cd55c99.png)
+
      
 <pre>
 <code>
