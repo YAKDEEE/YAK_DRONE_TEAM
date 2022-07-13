@@ -1,4 +1,4 @@
-hfunction is_Complete= TurnAngle(obj)
+function is_Complete= TurnAngle(obj)
     try
          if obj.nCount==3 
             turn(obj.mDrone,deg2rad(135));
