@@ -230,8 +230,8 @@ sStats = regionprops(L,'Area','Centroid','MajorAxisLength','MinorAxisLength');
 <code>
 try 
         obj.nMAxisLength;
-        obj.nmAXislength;
-        angle = atan(obj.nmAXislength/obj.nMAxisLength);
+        obj.nMINislength;
+        angle = atan(obj.nMINislength/obj.nMAxisLength);
         angle = fix(angle);
         
         if(angle > 3)
