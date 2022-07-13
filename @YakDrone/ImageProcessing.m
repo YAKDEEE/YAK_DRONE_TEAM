@@ -16,7 +16,7 @@ function is_Complete = ImageProcessing(obj)
         obj.aFiltered_blue = obj.aFiltered_blue .* vfilter;
         
         obj.aFiltered_blue = imgaussfilt(obj.aFiltered_blue,2);
-        imshow(obj.aFiltered_blue);
+%         imshow(obj.aFiltered_blue);
         
         [obj.nSize_y, obj.nSize_x] = size(obj.aFiltered_blue);
         
@@ -33,6 +33,7 @@ function is_Complete = ImageProcessing(obj)
     catch e
         disp(e);
         is_Complete=false;
+        obj.Finish();
     end
 end
 

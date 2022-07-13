@@ -63,7 +63,8 @@ function is_Complete = NewFindingCircle(obj)
         is_Complete = 1;
         
     catch e
-        disp(e)
+        disp(e);
+        obj.Finish();
         is_Complete =0;
     end
 end

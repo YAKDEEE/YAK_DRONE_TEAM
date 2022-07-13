@@ -96,6 +96,7 @@ function is_Center = CenterFinder(obj)
         end
     catch e
         disp(e);
+        obj.Finish();
         is_Center = -1;
     end
 end

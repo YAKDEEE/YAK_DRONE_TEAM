@@ -46,6 +46,7 @@ function is_Circle = OnlyDetectCircle(obj)
     catch e
         disp(e)
         is_Circle=-1;
+        obj.Finish();
         
     end
 end

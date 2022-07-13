@@ -3,7 +3,7 @@ function nError_code = Run(obj)
 %   자세한 설명 위치
     
     takeoff(obj.mDrone);
-%     move(obj.mDrone,[-0.2 0 -0.2],'Speed',obj.cSpeed_set);
+    move(obj.mDrone,[-0.2 0 -0.2],'Speed',obj.cSpeed_set);
 
     obj.nStep=0;
     obj.nCount=1;
@@ -38,7 +38,7 @@ function nError_code = Run(obj)
                     obj.nFailCount= obj.nFailCount+1;
                     nError_code=2;
                 end
-                if(obj.nFailCount>4)
+                if(obj.nFailCount>3)
                     if(~obj.NewFindingCircle())
                         nError_code=3;
                     end
@@ -55,16 +55,18 @@ function nError_code = Run(obj)
 
         %Step 2:Find Center and Shoot 
         if obj.nStep == 1
+            fprintf("current step: %d\n",obj.nStep);
             code = obj.CenterFinder();
             if (code==1)
                 obj.nStep = 2;
             elseif(code == 0)
                 obj.nFailCount= obj.nFailCount+1;
-                if(obj.nFailCount>4)
+                if(obj.nFailCount>3)
                     %Just shoot if no circle when after we had positioned.
                         % (Drone must have been in center of circle)
                     if(obj.is_last_we_had_positioned)
-                        moveforward(obj.mDrone,"Distance",0.7,"Speed",obj.cSpeed_set);
+                        moveforward(obj.mDrone,"Distance",1.3,"Speed",obj.cSpeed_set);
+                        obj.nStep = 2;
                         obj.nFailCount=0;
                     else
                         obj.nStep=0;
@@ -78,12 +80,13 @@ function nError_code = Run(obj)
 
         %Step 3:Turn and Go
         if obj.nStep == 2
+            fprintf("current step: %d\n",obj.nStep);
             obj.is_last_we_had_positioned=0;
             obj.nCount = obj.nCount + 1;
             
             %Work done, we are in destination.
             if obj.nCount == 4 
-                obj.Finish();
+                obj.MovetoLocation(0,-4);
     
             else
                 if obj.TurnAngle()
@@ -94,11 +97,6 @@ function nError_code = Run(obj)
             end
             
             %In level 3, Start with turn to 135 degree and move forward to prevent collision. 
-            if obj.nCount==3 
-                turn(obj.mDrone,deg2rad(45));
-                moveforward(obj.mDrone,"Distance",0.5,"Speed",obj.cSpeed_set);
-                
-            end
         end
         pause(obj.cWait_time);
     end

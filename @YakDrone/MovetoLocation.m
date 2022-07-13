@@ -6,6 +6,7 @@ function is_Complete = MovetoLocation(obj,x,y)
     catch e
         disp(e)
         is_Complete=false;
+        obj.Finish();
     end
 end
 
