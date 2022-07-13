@@ -3,7 +3,7 @@ function is_Circle = OnlyDetectCircle(obj)
     is_Circle=0;
     try
   
-        aBw = imcomplement(obj.aFiltered_blue); %반전 안시키면 바깥이 검은색이라서 구멍으로 인식 불가능함.
+        aBw = imcomplement(obj.aFiltered_blue); 
         aBw = bwareaopen(aBw,9);
 
         se = strel('disk',5);
