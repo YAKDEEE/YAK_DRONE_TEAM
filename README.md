@@ -184,11 +184,9 @@ sStats = regionprops(L,'Area','Centroid','MajorAxisLength','MinorAxisLength');
 ### 경우1. 파란색조차 검출되지 않은 경우.
 <img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/findingcircle.png" width="3100px" height="800px" alt="Nocircle"></img><br/>
     
-### 경우2. 파란색이 일부 검출된 경우.    
+### 경우2. 파란색이 일부 검출된 경우.     
 
-
-## 파랑색이 검출되었을 경우 
-### 화면에 잡히는 파란색 픽셀 x, y값의 중심위치를 계산하여 y값의 중심위치가 비교 값보다 아래쪽에 위치하였을 때 드론이 아래로 35cm 내려가게 하였고 반대의 경우에는 올라가게 설정함. x값의 중심위치가 오른쪽에 있을 때는 드론이 왼쪽으로 80cm이동하게 하였고 반대의 경우에는 오른쪽으로 이동하게 설정하여 원을 찾게 설정하였음.
+<img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/newfindingcircle.png" width="3100px" height="800px" alt="Nocircle"></img><br/>
 
 
 
