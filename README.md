@@ -133,7 +133,7 @@ MATLAB Support Package for Ryze Tello Drones
 #### 아래는 실제 드론 영상에서 모폴로지 적용 전 후를 비교한 이미지 입니다.     
 <img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/difference.png" width="450px" height="300px" alt="Nocircle"></img><br/>   
 
-## 2. 원 찾기 전략.
+## 2. 원 찾기 전략
 ### (원을 찾는 알고리즘은 OnlyDetectCircle 멤버함수에 있습니다.)
 ① 보수화된 파란색 이진화된 영상에 대하여 영역 경계선을 추적합니다.
 <pre>
