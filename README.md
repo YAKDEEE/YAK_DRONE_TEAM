@@ -257,6 +257,7 @@ try
 중심과 드론사이의 거리가 12cm 미만일 경우는 이동을 하지 않았고(이동거리 0), 사이의 거리가 12~20cm는 20cm를 이동하도록 하였습니다.    
 <pre>
 <code>
+...
 if((abs(nTarget_X) <= 0.20))
                         if(abs(nTarget_X)>=0.12)
                             nTarget_X = ((nTarget_X)/abs(nTarget_X)) * 0.2;
@@ -273,11 +274,21 @@ if((abs(nTarget_X) <= 0.20))
                             obj.nMoveWeight = nTarget_Y;
                         end
                     end
+ ...
 </code>
 </pre>
 
 ## 2. 멤버변수 오류
-### YakDrone을 값 클래스로 사용하면 할당되는 변수를 원래 객체에 대한 독립적인 복사본을 생성하고, 이 변수를 수정하는 경우 수정된 객체를 출력인수로 반환할때 오류가 발생하여 핸틀 클래스를 사용하였음. 핸들 클래스는 핸들 객체를 여러 변수에 할당하거나 함수에 전달할 수 있으므로 원래 객체의 복사본을 생성하지 않아 핸들 객체를 수정하는 함수는 객체를 변환할 필요가 없어 오류가 발생하지 않음.
+#### [발견된 문제점]      
+YakDrone 클래스를 설계하면서 하나의 멤버함수에서 할당한 멤버변수는 원래 객체에 대한 독립적인 복사본을 생성하고, 이 멤버변수를 접근하는 경우 다른 메모리를 참조하여 비어있는 멤버변수가 되는 문제점을 발견했습니다.
+#### [해결방법]     
+핸들 클래스를 상속하여 YakDrone 클래스 obj를 객체 본인을 참조하는 객체로 만들어 다른 함수에서도 멤버변수와 멤버함수에 자유롭게 접근할 수 있도록 구성했습니다,.
+<pre>
+<code>
+classdef YakDrone < handle
+...
+</code>
+</pre>
 
 ## 3. 드론의 카메라 위치에 따른 원 중심 Y값 Weights   
     
@@ -294,9 +305,11 @@ if((abs(nTarget_X) <= 0.20))
 
 
 # Ⅶ. 개선 가능 사항
-## 텔로 드론의 최소이동거리가 20cm로 주어진 원 크기에 비해 큰 경향이 있어, 원의 중심을 찾고 중심으로 이동하는 과정에서 정밀한 조정이 어려웠습니다. 이 부분을 해결하고자 각도를 변경한 후 대각선으로 이동하는 방법이 있었지만 시간이 늘어나는 단점이 있습니다.
+### 1. 텔로 드론의 최소이동거리가 20cm로 주어진 원 크기에 비해 큰 경향이 있어, 원의 중심을 찾고 중심으로 이동하는 과정에서 정밀한 조정이 어려웠습니다. 이 부분을 해결하고자 각도를 변경한 후 대각선으로 이동하는 방법이 있었지만 시간이 늘어나는 단점이 있습니다. 
 
-## 타원의 이심률을 이용하여 일정 각도를 회전하여 드론이 원을 정면에서 보게 하여 중심을 찾으려 하였지만 우리가 준비한 원이 완벽한 원이 아니라 이심률을 이용하기 어려웠습니다.
+### 2. 타원의 이심률을 이용하여 일정 각도를 회전하여 드론이 원을 정면에서 보게 하여 중심을 찾으려 하였지만 우리가 준비한 원이 완벽한 원이 아니라 이심률을 이용하기 어려웠습니다. 완벽한 원에 대해서는 이심률을 이용한 각도회전이 충분히 가능할 것으로 보입니다.
+
+### 3. snapshot이 일정 확률로 오류가 나 사진이 깨지는 경우가 있었습니다. 드론 카메라를 비디오 객체로 보아 실시간 영상을 처리하는 구조로 바꾸면 이러한 문제를 해결 할 수 있을것으로 보입니다.
 
 # Ⅷ. Reference
 
@@ -306,6 +319,5 @@ https://kr.mathworks.com/help/images/identifying-round-objects.html
 Mopolgy 사진 출처 -     
 https://velog.io/@redorangeyellowy/ch07-%EC%9D%B4%EC%A7%84-%EC%98%81%EC%83%81-%EC%B2%98%EB%A6%AC-%EB%AA%A8%ED%8F%B4%EB%A1%9C%EC%A7%80-1-%EC%B9%A8%EC%8B%9D%EA%B3%BC-%ED%8C%BD%EC%B0%BD     
 
-https://kr.mathworks.com/help/images/ref/regionprops.html
-
-https://bkshin.tistory.com/entry/OpenCV-19-%EB%AA%A8%ED%8F%B4%EB%A1%9C%EC%A7%80Morphology-%EC%97%B0%EC%82%B0-%EC%B9%A8%EC%8B%9D-%ED%8C%BD%EC%B0%BD-%EC%97%B4%EB%A6%BC-%EB%8B%AB%ED%9E%98-%EA%B7%B8%EB%A0%88%EB%94%94%EC%96%B8%ED%8A%B8-%ED%83%91%ED%96%87-%EB%B8%94%EB%9E%99%ED%96%87
+핸들 클래스 설명 -     
+https://kr.mathworks.com/help/images/ref/regionprops.html](https://kr.mathworks.com/help/matlab/handle-classes.html
