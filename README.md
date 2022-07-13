@@ -249,8 +249,26 @@ if((nTarget_X ~= 0) || (nTarget_Y ~= 0))
 </code>
 </pre>
 
-## 4. 이심률에 따른 각도 계산 전략
-### (해당 알고리즘은 ~~~)
+## 4. 장,단축 비율에 따른 드론 회전각 계산 전략
+### ① 세번째 원이 드론이 회전하는 각도에 따라 타원이 장축의 길이가 변화하므로 장축과 단축 사이의 각도를 아크탄젠트를 이용하여 회전각을 구하였습니다.
+<pre>
+<code>
+try 
+        obj.nMAxisLength;
+        obj.nmAXislength;
+        angle = atan(obj.nmAXislength/obj.nMAxisLength);
+        angle = fix(angle);
+        
+        if(angle > 3)
+            turn(obj.mDrone,deg2rad(90-angle));
+        end
+        is_Complete = true;
+    catch e
+        disp(e);
+        is_Complete=false;
+    end
+</code>
+</pre>
 
 # Ⅵ. 설계시 마주한 문제점.
 ## 1. 최소 이동 거리 문제
@@ -275,7 +293,7 @@ if((nTarget_X ~= 0) || (nTarget_Y ~= 0))
 ### 드론의 카메라가 기체의 아래쪽에 위치하므로 드론이 원의 중심을 찾아 이동하여도 드론이 위로 치우치는 경향이 있어 Y값에 Weight를 설정하였음.
 
 # Ⅶ. 개선 가능 사항
-## 텔로 드론의 최소이동거리가 20cm로 주어진 원 크기에 비해 큰 경향이 있음. 따라서 원의 중심을 찾고 중심으로 이동하는 과정에서 정밀한 조정이 어려웠음.
+## 텔로 드론의 최소이동거리가 20cm로 주어진 원 크기에 비해 큰 경향이 있어, 원의 중심을 찾고 중심으로 이동하는 과정에서 정밀한 조정이 어려웠습니다. 이 부분을 해결하고자 각도를 변경한 후 대각선으로 이동하는 방법이 있었지만 시간이 늘어나는 단점이 있습니다.
 
 # Ⅷ. Reference
 
