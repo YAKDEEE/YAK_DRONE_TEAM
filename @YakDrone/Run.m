@@ -12,6 +12,7 @@ function nError_code = Run(obj)
     nError_code=0;
     disp("Ready to Move!");
     while (obj.nCount <= obj.cTotal_Circle)
+      
         fprintf("current step: %d\n",obj.nStep);
         
         %Debug

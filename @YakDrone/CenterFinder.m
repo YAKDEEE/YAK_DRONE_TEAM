@@ -25,7 +25,7 @@ function is_Center = CenterFinder(obj)
                     if obj.nRatio > obj.cOptimized_ratio_th
                         nTarget_Y = round(nTarget_Y,2)-obj.cTargetY_weight;
                     else
-                        nTarget_Y = round(nTarget_Y,2)-obj.cTargetY_weight+80;
+                        nTarget_Y = round(nTarget_Y,2)-obj.cTargetY_weight+ 70;
                     end
                 
                     if(nTarget_X<=obj.cRange_th && nTarget_X>=-obj.cRange_th && nTarget_Y <=obj.cRange_th && nTarget_Y >= -obj.cRange_th)
@@ -38,7 +38,7 @@ function is_Center = CenterFinder(obj)
                         
                         %handle move distance / upto 20cm
                         if((abs(nTarget_X) <= 0.20))
-                            if(abs(nTarget_X)>=0.16)
+                            if(abs(nTarget_X)>=0.12)
                                 nTarget_X = ((nTarget_X)/abs(nTarget_X)) * 0.2;
                             else
                                 nTarget_X=0;
@@ -46,7 +46,7 @@ function is_Center = CenterFinder(obj)
                             end
                         end
                         if((abs(nTarget_Y) <= 0.20))
-                            if(abs(nTarget_Y)>=0.16)
+                            if(abs(nTarget_Y)>=0.12)
                                 nTarget_Y = ((nTarget_Y)/abs(nTarget_Y)) * 0.2;
                             else
                                 nTarget_Y=0;
@@ -91,6 +91,7 @@ function is_Center = CenterFinder(obj)
                             moveforward(obj.mDrone,"Distance",dist,"Speed",obj.cSpeed_set);
                         catch e
                             disp(e);
+                            obj.Finish();
                             disp("Error!");
                         end
                     end

@@ -1,14 +1,19 @@
-function is_Complete= TurnAngle(obj)
+hfunction is_Complete= TurnAngle(obj)
     try
          if obj.nCount==3 
             turn(obj.mDrone,deg2rad(135));
             obj.MovetoLocation(-0.6,0);
-            moveforward(obj.mDrone,"Distance",0.8,"Speed",obj.cSpeed_set);
+            if(obj.nMoveWeight<0)
+                nDist_weight = -obj.nMoveWeight*1.4;
+            else
+                nDist_weight =0;
+            end
+            moveforward(obj.mDrone,"Distance",1+nDist_weight,"Speed",obj.cSpeed_set);
          else
          
             turn(obj.mDrone,deg2rad(90));
-            nDist_weight = obj.nMoveWeight*1.4;
-            moveforward(obj.mDrone,"Distance",0.8+nDist_weight,"Speed",obj.cSpeed_set);
+            nDist_weight = obj.nMoveWeight*1.8;
+            moveforward(obj.mDrone,"Distance",0.87+nDist_weight,"Speed",obj.cSpeed_set);
          end
         is_Complete=true;
     catch e

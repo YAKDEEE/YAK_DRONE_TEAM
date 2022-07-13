@@ -29,7 +29,7 @@ classdef YakDrone < handle
         cFinder_X_distance = 0.5;
 
         %etc
-        cWait_time=0.;
+        cWait_time=0.0;
         
 
         mDrone;
@@ -60,7 +60,7 @@ classdef YakDrone < handle
     methods 
         function obj = YakDrone()
             obj.mDrone = ryze();
-            obj.mCam = camera(obj.mDrone);
+            obj.mCam = camera(obj.mDrone,"FPV");
         end
         [nCenter_X,nCenter_Y]=BluePixelFocusMove(obj);
         is_Complete = ImageProcessing(obj);

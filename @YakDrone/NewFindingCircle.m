@@ -74,8 +74,9 @@ function is_Complete = NewFindingCircle(obj)
                 elseif nSum_of_blue_y <= -50
                     obj.MovetoLocation(0,-cFinder_Y_distance);
                 else 
-                    is_Complete = 0;
-                    return;
+                   moveback(obj.mDrone,"Distance",0.5,"Speed",obj.cSpeed_set);
+                    
+                  
                 end
             end
         end
