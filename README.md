@@ -122,26 +122,64 @@ MATLAB Support Package for Ryze Tello Drones
  </pre>
  
  
-### 모폴로지(Mopolgy) 연산이란?
+#### 모폴로지(Mopolgy) 연산이란?
 모폴로지는  영상에서 객체의 형태 및 구조에 대해 분석하고 처리하는 기법을 의미합니다.       
      
 모폴로지 팽창은 객체의 외곽을 확장시키는 연산입니다.     
 <img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/dilation.png" width="450px" height="300px" alt="Nocircle"></img><br/>     
 모폴로지 침식은 객체의 외곽을 깍아내는 연산입니다.     
 <img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/erosion.png" width="450px" height="300px" alt="Nocircle"></img><br/>   
-    
-### 아래는 실제 드론 영상에서 모폴로지 적용 전 후를 비교한 이미지 입니다.     
-
-<img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/erosion.png" width="450px" height="300px" alt="Nocircle"></img><br/>   
+     
+#### 아래는 실제 드론 영상에서 모폴로지 적용 전 후를 비교한 이미지 입니다.     
+<img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/difference.png" width="450px" height="300px" alt="Nocircle"></img><br/>   
 
 ## 2. 원 찾기 전략.
 ### (원을 찾는 알고리즘은 OnlyDetectCircle 멤버함수에 있습니다.)
-① 이진화된 
-② 
-
+① 보수화된 파란색 이진화된 영상에 대하여 영역 경계선을 추적합니다.
+<pre>
+<code>
+ [B,L] = bwboundaries(aBw,'noholes');
+ </code>
+ </pre>
+② 닫힌 영역에 대하여 면적, 중심, 장축의 길이, 단축의 길이 를 찾아낸 후, Metric과 실제 영역을 비교하여 원과의 유사도를 찾습니다.    
+그중에서 가장 크고 원과 가까운 영역의 중심, 장/단축의 길이를 멤버변수에 저장합니다.   
 
 <img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/metric.png" width="200px" height="100px" alt="Nocircle"></img><br/>
+<pre>
+<code>
+sStats = regionprops(L,'Area','Centroid','MajorAxisLength','MinorAxisLength');
+        
+     
+ nMax_sizeB = 0;
 
+ for k = 1:length(B)
+     aBoundary = B{k};
+     [nSizeB,void] = size(aBoundary);
+
+     nDelta_sq = diff(aBoundary).^2;    
+     nPerimeter = sum(sqrt(sum(nDelta_sq,2)));
+
+     nArea = sStats(k).Area;
+     nMetric = 4*pi*nArea/nPerimeter^2;
+
+     if nMetric > obj.cCircle_th
+         if(nSizeB>10)
+             if(nSizeB<3000 && nSizeB>nMax_sizeB)
+                 obj.aCentroid = sStats(k).Centroid;
+
+                 obj.nCircle_r = mean([sStats(k).MajorAxisLength sStats(k).MinorAxisLength],2);
+
+                 obj.nRatio = sStats(k).MinorAxisLength / sStats(k).MajorAxisLength;
+                 obj.aBestCircle = aBoundary;
+                 is_Circle = 1;
+
+                 nMax_sizeB = nSizeB;
+             end
+         end
+     end
+ end
+ </code>
+ </pre>
 ## Exception. 원이 검출 되지 않았을 경우
 ### (1번의 멤버함수에서 false 값이 5번 이상 나타난 경우)
 <img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/findingcircle.png" width="3100px" height="800px" alt="Nocircle"></img><br/>
