@@ -21,7 +21,7 @@ MATLAB Support Package for Ryze Tello Drones
 ⑧  Reference     
 
 # How to start?!
-### 본 클래스는 Matlab 프로젝트로 작성되어 .prj 파일을 열어 써 파일경로에 클래스 파일들을 추가할 수 있습니다!!!
+### 본 클래스는 Matlab 프로젝트로 작성되어 YakDrone.prj 파일을 열어 써 파일경로에 클래스 파일들을 추가할 수 있습니다!!!
 
 # Ⅰ. 설계 지향점과 방법론 
 ### 코드 유지와 보수, 디버그 및 효율적인 작동을 위하여 아래와 같은 지향점을 두었습니다.
