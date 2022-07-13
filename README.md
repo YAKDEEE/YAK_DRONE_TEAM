@@ -171,7 +171,7 @@ sStats = regionprops(L,'Area','Centroid','MajorAxisLength','MinorAxisLength');
     
 ### 경우2. 파란색이 일부 검출된 경우.     
 
-<img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/newfindingcircle.png" width="200px" height="500px" alt="Nocircle"></img><br/>
+<img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/newfindingcircle.png" width="400px" height="500px" alt="Nocircle"></img><br/>
     
 ### 경우3. 파란색이 화면상에 완전히 채워져 있을 경우.
 (파란색이 중앙에 있을경우는(완전히 드론 앞에 파란색이 있는 경우) 뒤로 움직이면서 거리를 벌립니다.)    
