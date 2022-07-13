@@ -178,24 +178,43 @@ sStats = regionprops(L,'Area','Centroid','MajorAxisLength','MinorAxisLength');
 <img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/moveback.png" width="200px" height="350px" alt="Nocircle"></img><br/>   
     
 ## 3. 중심 맞추기 알고리즘 및 원 통과 전략
-### (해당 알고리즘은 CenterFinder 멤버함수에 있습니다.)
-#### 중심 맞추기
-##### ① 원의 중심의 좌표와 이미지 중앙의 좌표값의 차이만큼 드론을 원의 중심으로 최대한 이동시킵니다.
+### 중심 맞추기 (중심을 찾고 이동하는 알고리즘은 Centerfinder 멤버함수에 있습니다.)
+① 원의 중심의 좌표와 이미지 중앙의 좌표값의 차이만큼 드론을 원의 중심으로 최대한 이동시킵니다. 이때 이동할 거리는 아래의 비례식에 의하여 계산되었습니다.     
+     
+> R = 실제 원의 반지름(m)     
+>    
+> r = 픽셀상 반지름      
+>     
+> X = 픽셀당 실제 거리
+>     
+> d = 픽셀상 거리
+
+![image](https://user-images.githubusercontent.com/51030319/178751971-f9dba81b-f750-48f5-8dbd-55bb4b3417e2.png)
+
 <pre>
 <code>
+...    
+  coeff = (obj.cCircle_size(1,obj.nCount)/(obj.nCircle_r/2.3));
 
+  nTarget_X = round(coeff * nTarget_X,2);
+  nTarget_Y = round(coeff * nTarget_Y,2);
+...    
 </code>
 </pre>
-
-##### ② 드론이 이미지의 중앙 좌표값이 원의 중심좌표와 비슷하면 드론이 직진했을 때 원내부로 통과할 수 있다고 판단하여 드론에 직진 명령을 주어 원을 통과합니다.
+     
+ ② 계산된 원의 반지름을 바탕으로 현재 원까지의 거리를 구합니다. 그 후 직진합니다.
+     
 <pre>
 <code>
-if((nTarget_X ~= 0) || (nTarget_Y ~= 0))
-                            obj.MovetoLocation(nTarget_X,nTarget_Y);
-                            obj.is_last_we_had_positioned=1;
-                        else
-                            is_Center = 1;
-                        end
+...
+   Circle_r = obj.nCircle_r*(0.39/obj.cCircle_size(1,obj.nCount));
+
+   nDistance = (515)*(Circle_r^(-0.954));
+   dist = round(nDistance,2)+0.3;
+
+
+   moveforward(obj.mDrone,"Distance",dist,"Speed",obj.cSpeed_set);
+...
 </code>
 </pre>
 
@@ -219,19 +238,14 @@ if((nTarget_X ~= 0) || (nTarget_Y ~= 0))
 
 <pre>
 <code>
-if is_Center 
-                        Circle_r = obj.nCircle_r*(0.39/obj.cCircle_size(1,obj.nCount));
-                    
-                        nDistance = (515)*(Circle_r^(-0.954));
-                        dist = round(nDistance,2)+0.3;
-                        
-                        try 
-                            moveforward(obj.mDrone,"Distance",dist,"Speed",obj.cSpeed_set);
-                        catch e
-                            disp(e);
-                            disp("Error!");
-                        end
-                    end
+
+...    
+  coeff = (obj.cCircle_size(1,obj.nCount)/(obj.nCircle_r/2.3));
+
+  nTarget_X = round(coeff * nTarget_X,2);
+  nTarget_Y = round(coeff * nTarget_Y,2);
+...    
+
 </code>
 </pre>
 
