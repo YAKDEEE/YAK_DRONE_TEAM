@@ -2,9 +2,9 @@
  ### 대한전기학회, Mathworks Korea, 광운대학교 공동 주최 2022 미니드론 대회 본선 진출 팀 “약둘기”의 드론 제어 클래스입니다.
  <img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/NormalYAK.png" width="698px" height="601px" alt="NormalYAK"></img>
 
-# How to start?!
-### matlab 현재 폴더가 clone한 폴더인지 확인하세요! 
-### main.m을 스크립트를 실행하면 해당 프로젝트 코드가 실행됩니다!
+# 주의점!!
+### matlab 현재 폴더가 clone한 폴더인지 확인하세요! main.m을 스크립트를 실행하면 해당 프로젝트 코드가 실행됩니다!    
+### 모든 멤버함수에는 try catch문이 적용되어 있습니다. 만약 드론이 비상착륙 했다면 에러 내용을 확인하세요!    
 
 # Requirements
 Image Processing Toolbox     
@@ -102,7 +102,7 @@ MATLAB Support Package for Ryze Tello Drones
  </code>
  </pre>
       
-③ 모폴로지 팽창 연산을 적용하여 깔끔한 파란색을 얻습니다.
+③ 모폴로지 팽창 연산을 적용하여 깔끔한 파란색 바이너리 영상을 얻습니다.
 <pre>
 <code>
  se = strel('disk',7);
@@ -110,16 +110,29 @@ MATLAB Support Package for Ryze Tello Drones
  obj.aFiltered_blue = round(obj.aFiltered_blue);
  </code>
  </pre>
-         
-         
-### 모폴로지(Mopolgy) 연산이란?
-모폴로지는  영상에서 객체의 형태 및 구조에 대해 분석하고 처리하는 기법을 의미합니다.
-모폴로지 팽창은 객체의 외곽을 확장시키는 연산입니다.
-<img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/metric.png" width="200px" height="100px" alt="Nocircle"></img><br/>
-모폴로지 침식은 객체의 외곽을 깍아내는 연산입니다.
-<img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/metric.png" width="200px" height="100px" alt="Nocircle"></img><br/>
 
-#### 파랑색의 HSV값을 이용해 이미지에서 파랑색을 검출하고, 모폴로지연산과 가우시안 필터를 이용해 잡음을 제거함. // -> 삭제할수도있음
+④ 파란색 바이너리 영상에 보수를 취한후 모폴로지 침식 연산을 적용합니다.
+<pre>
+<code>
+ aBw = imcomplement(obj.aFiltered_blue); 
+ aBw = bwareaopen(aBw,9);
+ se = strel('disk',5);
+ aBw = imerode(aBw,se);  
+ </code>
+ </pre>
+ 
+ 
+### 모폴로지(Mopolgy) 연산이란?
+모폴로지는  영상에서 객체의 형태 및 구조에 대해 분석하고 처리하는 기법을 의미합니다.       
+     
+모폴로지 팽창은 객체의 외곽을 확장시키는 연산입니다.     
+<img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/dilation.png" width="450px" height="300px" alt="Nocircle"></img><br/>     
+모폴로지 침식은 객체의 외곽을 깍아내는 연산입니다.     
+<img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/erosion.png" width="450px" height="300px" alt="Nocircle"></img><br/>   
+    
+### 아래는 실제 드론 영상에서 모폴로지 적용 전 후를 비교한 이미지 입니다.     
+
+
 
 ## 2. 원 찾기 전략.
 ### (원을 찾는 알고리즘은 OnlyDetectCircle 멤버함수에 있습니다.)
@@ -175,7 +188,12 @@ MATLAB Support Package for Ryze Tello Drones
 ## 텔로 드론의 최소이동거리가 20cm로 주어진 원 크기에 비해 큰 경향이 있음. 따라서 원의 중심을 찾고 중심으로 이동하는 과정에서 정밀한 조정이 어려웠음.
 
 # Ⅷ. Reference
-https://kr.mathworks.com/help/images/identifying-round-objects.html
+
+Metrics 사진 출처 -    
+https://kr.mathworks.com/help/images/identifying-round-objects.html    
+     
+Mopolgy 사진 출처 -     
+https://velog.io/@redorangeyellowy/ch07-%EC%9D%B4%EC%A7%84-%EC%98%81%EC%83%81-%EC%B2%98%EB%A6%AC-%EB%AA%A8%ED%8F%B4%EB%A1%9C%EC%A7%80-1-%EC%B9%A8%EC%8B%9D%EA%B3%BC-%ED%8C%BD%EC%B0%BD     
 
 https://kr.mathworks.com/help/images/ref/regionprops.html
 
