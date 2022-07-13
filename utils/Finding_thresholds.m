@@ -22,8 +22,8 @@ while 1
     v = hsv(:,:,3);
     
 
-    filter = s > 0.4;
-    vfilter = v > 0.13;
+    filter = s > 0.3;
+    vfilter = v > 0.15;
 %     red_filter = frame(:,:,1)<30;
 %     blue_filter = frame(:,:,3)>180;
     h = imgaussfilt(h,2);
