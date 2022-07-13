@@ -148,22 +148,8 @@ MATLAB Support Package for Ryze Tello Drones
 <pre>
 <code>
 sStats = regionprops(L,'Area','Centroid','MajorAxisLength','MinorAxisLength');
+        ...
         
-     
- nMax_sizeB = 0;
-
- for k = 1:length(B)
-     aBoundary = B{k};
-     [nSizeB,void] = size(aBoundary);
-
-     nDelta_sq = diff(aBoundary).^2;    
-     nPerimeter = sum(sqrt(sum(nDelta_sq,2)));
-
-     nArea = sStats(k).Area;
-     nMetric = 4*pi*nArea/nPerimeter^2;
-
-     if nMetric > obj.cCircle_th
-         if(nSizeB>10)
              if(nSizeB<3000 && nSizeB>nMax_sizeB)
                  obj.aCentroid = sStats(k).Centroid;
 
@@ -175,8 +161,7 @@ sStats = regionprops(L,'Area','Centroid','MajorAxisLength','MinorAxisLength');
 
                  nMax_sizeB = nSizeB;
              end
-         end
-     end
+        ...
  end
  </code>
  </pre>
@@ -186,7 +171,7 @@ sStats = regionprops(L,'Area','Centroid','MajorAxisLength','MinorAxisLength');
     
 ### 경우2. 파란색이 일부 검출된 경우.     
 
-<img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/newfindingcircle.png" width="3100px" height="800px" alt="Nocircle"></img><br/>
+<img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/newfindingcircle.png" width="200px" height="500px" alt="Nocircle"></img><br/>
     
 ### 경우3. 파란색이 화면상에 완전히 채워져 있을 경우.
 (파란색이 중앙에 있을경우는(완전히 드론 앞에 파란색이 있는 경우) 뒤로 움직이면서 거리를 벌립니다.)    
