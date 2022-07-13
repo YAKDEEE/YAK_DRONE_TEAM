@@ -52,6 +52,9 @@ while 1
     
 
     subplot(2,1,2),subimage(binary_res);
+    nDetected_pixels = nnz(binary_res);
+
+    nDetected_pixels
     disp("th_down: "+th_down+" th_up:" +th_up);
 
     x=input("(quit: q, th_up-up: a, th_down-up: s, th_up-down: d, th_down-down: f) input: ",'s');

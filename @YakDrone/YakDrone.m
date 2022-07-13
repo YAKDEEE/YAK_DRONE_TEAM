@@ -13,7 +13,7 @@ classdef YakDrone < handle
         cCircle_th = 0.45;
         cCircle_rad_th = 50;
         cCircle_Max_ecc_th = 0.85;
-        cCircle_Min_ecc_th = 0.8;
+        cCircle_Min_ecc_th = 0.5;
         cTotal_Circle = 3;
         cCircle_size = [0.39,0.28,0.25];
         cRange_th = 60; 
@@ -25,10 +25,10 @@ classdef YakDrone < handle
         cMax_move_dist=0.5;
         cShoot_distance = 1.3;
         cFinder_Y_distance = 0.35;
-        cFinder_X_distance = 0.8;
+        cFinder_X_distance = 0.5;
 
         %etc
-        cWait_time=0.3;
+        cWait_time=0.;
         
 
         mDrone;

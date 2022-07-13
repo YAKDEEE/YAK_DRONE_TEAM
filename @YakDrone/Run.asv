@@ -65,7 +65,8 @@ function nError_code = Run(obj)
                     %Just shoot if no circle when after we had positioned.
                         % (Drone must have been in center of circle)
                     if(obj.is_last_we_had_positioned)
-                        moveback(obj.mDrone,"Distance",0.6,"Speed",obj.cSpeed_set);
+                        moveforward(obj.mDrone,"Distance",1.3,"Speed",obj.cSpeed_set);
+                        obj.nStep = 2;
                         obj.nFailCount=0;
                         obj.is_last_we_had_positioned=0;
                     else

@@ -31,14 +31,15 @@ function is_Complete = NewFindingCircle(obj)
                 nTarget_X = -1;
                 nTarget_Y = 1.5 - nCurrent_height;
             case 1
-                nTarget_X = 0;
-                nTarget_Y = 0.5 - nCurrent_height;
-            case 2
                 nTarget_X = 2;
                 nTarget_Y = 0;
+                
+            case 2
+                nTarget_X = 0;
+                nTarget_Y = 0.5 - nCurrent_height;
             case 3
                 nTarget_X = 0;
-                nTarget_Y = 1.5 - nCurrent_height;
+                nTarget_Y = 0;
             otherwise
                 filp(obj.mDrone,'forward');
                 obj.Finish();

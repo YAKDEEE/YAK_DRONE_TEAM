@@ -17,6 +17,7 @@ function is_Center = CenterFinder(obj)
                     nTarget_X = round(nTarget_X,2);
                 
                     nTarget_Y = -nBestCenter_Y + (obj.nSize_y/2);
+                    fprintf("%f 이심률\n",obj.nEccentricity);
                     if obj.nEccentricity < obj.cCircle_Min_ecc_th
                         nTarget_Y = round(nTarget_Y,2)-obj.cTargetY_weight;
                     else

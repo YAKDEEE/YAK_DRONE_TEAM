@@ -3,7 +3,8 @@ function is_Complete = ImageProcessing(obj)
         [aRaw_frame, void] = snapshot(obj.mCam);
         aHSV_frame = rgb2hsv(aRaw_frame);
 
-        if ~aRaw_frame
+      
+        if nnz(aHSV_frame(:,:,1)) < 400000
             is_Complete = false;
             return;
         end
@@ -16,7 +17,7 @@ function is_Complete = ImageProcessing(obj)
         obj.aFiltered_blue = obj.aFiltered_blue .* vfilter;
         
         obj.aFiltered_blue = imgaussfilt(obj.aFiltered_blue,2);
-%         imshow(obj.aFiltered_blue);
+        imshow(obj.aFiltered_blue);
         
         [obj.nSize_y, obj.nSize_x] = size(obj.aFiltered_blue);
         
