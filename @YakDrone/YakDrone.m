@@ -14,7 +14,7 @@ classdef YakDrone < handle
         cCircle_rad_th = 50;
         cCircle_Max_ecc_th = 0.85;
        % cCircle_Min_ecc_th = 0.5;
-        cOptimized_ratio_th = 0.5; % 단축/장축 비율th 
+        cOptimized_ratio_th = 0.7; % 단축/장축 비율th 
         cTotal_Circle = 3;
         cCircle_size = [0.39,0.28,0.25];
         cRange_th = 60; 

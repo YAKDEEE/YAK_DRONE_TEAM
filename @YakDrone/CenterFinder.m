@@ -23,9 +23,9 @@ function is_Center = CenterFinder(obj)
                    fprintf("%f 단축/장축\n",obj.nRatio);
     
                     if obj.nRatio > obj.cOptimized_ratio_th
-                        nTarget_Y = round(nTarget_Y,2);
+                        nTarget_Y = round(nTarget_Y,2)-obj.cTargetY_weight;
                     else
-                        nTarget_Y = round(nTarget_Y,2)-obj.cTargetY_weight+50;
+                        nTarget_Y = round(nTarget_Y,2)-obj.cTargetY_weight+80;
                     end
                 
                     if(nTarget_X<=obj.cRange_th && nTarget_X>=-obj.cRange_th && nTarget_Y <=obj.cRange_th && nTarget_Y >= -obj.cRange_th)

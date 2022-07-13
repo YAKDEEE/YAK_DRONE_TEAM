@@ -7,7 +7,7 @@ function is_Complete= TurnAngle(obj)
          else
          
             turn(obj.mDrone,deg2rad(90));
-            nDist_weight = obj.nMoveWeight*1.3;
+            nDist_weight = obj.nMoveWeight*1.4;
             moveforward(obj.mDrone,"Distance",0.8+nDist_weight,"Speed",obj.cSpeed_set);
          end
         is_Complete=true;
