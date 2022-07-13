@@ -126,11 +126,12 @@ MATLAB Support Package for Ryze Tello Drones
 모폴로지는  영상에서 객체의 형태 및 구조에 대해 분석하고 처리하는 기법을 의미합니다.       
      
 모폴로지 팽창은 객체의 외곽을 확장시키는 연산입니다.     
-<img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/dilation.png" width="400px" height="300px" alt="Nocircle"></img><br/>     
+<img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/dilation.png" width="450px" height="300px" alt="Nocircle"></img><br/>     
 모폴로지 침식은 객체의 외곽을 깍아내는 연산입니다.     
-<img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/erosion.png" width="400px" height="300px" alt="Nocircle"></img><br/>   
+<img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/erosion.png" width="450px" height="300px" alt="Nocircle"></img><br/>   
     
 ### 아래는 실제 드론 영상에서 모폴로지 적용 전 후를 비교한 이미지 입니다.     
+
 
 
 ## 2. 원 찾기 전략.
