@@ -13,7 +13,7 @@ function is_Circle = OnlyDetectCircle(obj)
 
         [B,L] = bwboundaries(aBw,'noholes');
         
-        sStats = regionprops(L,'Area','Centroid','MajorAxisLength','MinorAxisLength');
+        sStats = regionprops(L,'Area','Centroid'','MajorAxisLength','MinorAxisLength');
         
      
         nMax_sizeB = 0;
@@ -34,8 +34,9 @@ function is_Circle = OnlyDetectCircle(obj)
                         obj.aCentroid = sStats(k).Centroid;
                        
                         obj.nCircle_r = mean([sStats(k).MajorAxisLength sStats(k).MinorAxisLength],2);
-                  
-                        obj.nRatio = sStats(k).MinorAxisLength / sStats(k).MajorAxisLength;
+                        obj.nMajorAxisLength = sStats(k).MajorAxisLength;
+                        obj.nMinorAxisLength= sStats(k).MinorAxisLength;
+                        obj.nRatio = sStats(k).MinorAxisLength
                         obj.aBestCircle = aBoundary;
                         is_Circle = 1;
                         
