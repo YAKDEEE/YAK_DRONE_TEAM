@@ -102,7 +102,7 @@ MATLAB Support Package for Ryze Tello Drones
  </code>
  </pre>
       
-③ 모폴로지 팽창 연산을 적용하여 깔끔한 파란색을 얻습니다.
+③ 모폴로지 팽창 연산을 적용하여 깔끔한 파란색 바이너리 영상을 얻습니다.
 <pre>
 <code>
  se = strel('disk',7);
@@ -110,15 +110,28 @@ MATLAB Support Package for Ryze Tello Drones
  obj.aFiltered_blue = round(obj.aFiltered_blue);
  </code>
  </pre>
-         
-### 모폴로지(Mopolgy) 연산이란?
-모폴로지는  영상에서 객체의 형태 및 구조에 대해 분석하고 처리하는 기법을 의미합니다.     
-모폴로지 팽창은 객체의 외곽을 확장시키는 연산입니다.     
-<img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/dilation.png" width="200px" height="100px" alt="Nocircle"></img><br/>     
-모폴로지 침식은 객체의 외곽을 깍아내는 연산입니다.     
-<img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/erosion.png" width="200px" height="100px" alt="Nocircle"></img><br/>     
 
-#### 파랑색의 HSV값을 이용해 이미지에서 파랑색을 검출하고, 모폴로지연산과 가우시안 필터를 이용해 잡음을 제거함. // -> 삭제할수도있음
+④ 파란색 바이너리 영상에 보수를 취한후 모폴로지 침식 연산을 적용합니다.
+<pre>
+<code>
+ aBw = imcomplement(obj.aFiltered_blue); 
+ aBw = bwareaopen(aBw,9);
+ se = strel('disk',5);
+ aBw = imerode(aBw,se);  
+ </code>
+ </pre>
+ 
+ 
+### 모폴로지(Mopolgy) 연산이란?
+모폴로지는  영상에서 객체의 형태 및 구조에 대해 분석하고 처리하는 기법을 의미합니다.       
+     
+모폴로지 팽창은 객체의 외곽을 확장시키는 연산입니다.     
+<img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/dilation.png" width="400px" height="300px" alt="Nocircle"></img><br/>     
+모폴로지 침식은 객체의 외곽을 깍아내는 연산입니다.     
+<img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/erosion.png" width="400px" height="300px" alt="Nocircle"></img><br/>   
+    
+### 아래는 실제 드론 영상에서 모폴로지 적용 전 후를 비교한 이미지 입니다.     
+
 
 ## 2. 원 찾기 전략.
 ### (원을 찾는 알고리즘은 OnlyDetectCircle 멤버함수에 있습니다.)
