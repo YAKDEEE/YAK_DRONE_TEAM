@@ -93,16 +93,16 @@ nBottom_total = 0;
             elseif nSum_of_blue_y <= -50
                 obj.MovetoLocation(0,-obj.cFinder_Y_distance);
             else 
-   
+                
                if((nLeft_total/nRight_total) < 0.8)
                    obj.MovetoLocation(obj.cFinder_X_distance,0);
                elseif ((nLeft_total/nRight_total) > 1.2)
                    obj.MovetoLocation(-obj.cFinder_X_distance,0);
                else
-                   if((nTop_total/nBottom_total) < 0.8)
-                        obj.MovetoLocation(0,-obj.cFinder_Y_distance);
-                    elseif ((nTop_total/nBottom_total) > 1.2)
-                        obj.MovetoLocation(0,obj.cFinder_Y_distance);
+                   if((nLeft_total/nRight_total) < 0.8)
+                        obj.MovetoLocation(obj.cFinder_X_distance,0);
+                    elseif ((nLeft_total/nRight_total) > 1.2)
+                        obj.MovetoLocation(-obj.cFinder_X_distance,0);
                    else
                         moveback(obj.mDrone,"Distance",0.5,"Speed",obj.cSpeed_set);
                    end
