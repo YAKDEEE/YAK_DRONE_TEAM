@@ -12,6 +12,7 @@ Image Processing Toolbox
 MATLAB Support Package for Ryze Tello Drones       
  
 # Getting Started
+### 최종업데이트: 07.14 대회 끝난 후 2차 시도 실패 원인 해결(세부내용-원 찾기 전략)        
 ### 아래 코드와 설명은 약둘기 팀이 어떤 알고리즘과 방법론을 적용했는지 이해하기 쉽도록 구성되었습니다.
 
 ①  설계 지향점과 방법론 제시     
@@ -175,8 +176,65 @@ sStats = regionprops(L,'Area','Centroid','MajorAxisLength','MinorAxisLength');
 <img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/newfindingcircle.png" width="600px" height="600px" alt="Nocircle"></img><br/>
     
 ### 경우3. 파란색이 화면상에 완전히 채워져 있을 경우.
+#### 2차 시도 실패 원인은 여기 있다고 보았습니다. 아래는 기존 작동 방식입니다.    
 (파란색이 중앙에 있을경우는(완전히 드론 앞에 파란색이 있는 경우) 뒤로 움직이면서 거리를 벌립니다.)    
 <img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/moveback.png" width="200px" height="350px" alt="Nocircle"></img><br/>   
+    
+#### 아래는 새로운 작동 방식입니다.     
+화면의 구역을 4군데로 나누어 픽셀의 수를 각각 세어봅니다.     
+![TB](https://user-images.githubusercontent.com/51030319/178907119-d88af568-ca3c-460e-9152-f4b999a5e43e.png)
+![LR](https://user-images.githubusercontent.com/51030319/178907592-e348a5ae-44ce-4309-8f56-726e95347e26.png)
+<pre>
+<code>
+...    
+nLeft_total = 0;
+nRight_total = 0;
+nTop_total = 0;
+nBottom_total = 0;
+  
+     for i = 1: obj.nSize_y
+        for j = 1:obj.nSize_x
+            if obj.aFiltered_blue(i,j)==1  
+            
+               ...
+               
+                if(i<(obj.nSize_y/2)) 
+                    nTop_total = nTop_total +1;
+                else
+                    nBottom_total = nBottom_total + 1;
+                end
+
+                if(j<(obj.nSize_x/2)) 
+                    nLeft_total = nLeft_total +1;
+                else
+                    nRight_total = nRight_total + 1;
+                end
+   
+...    
+</code>
+</pre>
+
+상/하의 좌/우 의 비율을 따져 어느쪽으로 이동할지 정확히 결정합니다. 없으면 뒤로 갑니다!
+<pre>
+<code>
+...    
+ if((nLeft_total/nRight_total) < 0.8)
+        obj.MovetoLocation(obj.cFinder_X_distance,0);
+    elseif ((nLeft_total/nRight_total) > 1.2)
+        obj.MovetoLocation(-obj.cFinder_X_distance,0);
+    else
+        if((nTop_total/nBottom_total) < 0.8)
+             obj.MovetoLocation(0,-obj.cFinder_Y_distance);
+         elseif ((nTop_total/nBottom_total) > 1.2)
+             obj.MovetoLocation(0,obj.cFinder_Y_distance);
+        else
+             moveback(obj.mDrone,"Distance",0.5,"Speed",obj.cSpeed_set);
+        end
+    end
+
+...    
+</code>
+</pre>
     
 ## 3. 중심 맞추기 알고리즘 및 원 통과 전략
 ### 중심 맞추기 (중심을 찾고 이동하는 알고리즘은 Centerfinder 멤버함수에 있습니다.)
