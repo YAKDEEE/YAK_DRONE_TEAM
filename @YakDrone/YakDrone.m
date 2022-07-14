@@ -26,7 +26,7 @@ classdef YakDrone < handle
         cFinder_X_distance = 0.5;
 
         %etc
-        cWait_time=0.0;
+        cWait_time=1.0;
         
 
         mDrone;
