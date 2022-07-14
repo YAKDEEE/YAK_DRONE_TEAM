@@ -1,5 +1,5 @@
 # YakDrone
- ### 대한전기학회 공동 주최 2022 미니드론 대회 본선 진출 팀 “약둘기”의 드론 제어 클래스입니다.
+ ### 대한전기학회 공동 주최 2022 미니드론 대회 "대상" 수상 팀 “약둘기”의 드론 제어 클래스입니다.
  <img src="https://github.com/YAKDEEE/YAK_DRONE_TEAM/blob/main/images/NormalYAK.png" width="698px" height="601px" alt="NormalYAK"></img>
 
 # 주의점!!
